@@ -1,0 +1,21 @@
+
+ns
+
+JavaScript passes arguments to a function using pass-by-value.
+    - each argument is copied into the parameter variable.
+    - Any changes to a parameter's value within the function will affect only the parameter, not
+      - the original variable passed to the function.
+      
+Lexical Scoping
+    - an inner function contains the scope of the parent functions (or the global scope), as how they are defined in the source code.
+
+Hoisting
+    - when we combine variable declaration with variable assignment like (var a = 1;) 
+      - JavaScript only hoists variable declarations, not the assignments.
+    - When function declarations are hoisted to the top of the scope, the entire function
+      - declaration including the body is hoisted.
+    - A function expression obeys hoisting rules for variable declarations.
+
+Best Practice
+  - Always declare variables on the top of their scopes, grouped together with a single var statement.
+  - Always declare functions before calling them.
