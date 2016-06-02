@@ -82,6 +82,7 @@ function Duck(type, canFly) {
   this.canFly = canFly;
 }
 
+/*
 // Creating a Dog object with constructor
 var fido = new Dog("Fido", "Mixed", 38);
 var fluffy = new Dog("Fluffy", "Poodle", 30);
@@ -98,4 +99,72 @@ for (var dog in dogs) {
                + " " + dogs[dog].breed);
 }
 
+*/
 
+// Exercises: The Date Object
+
+function dateSuffix(date) {
+  var suffix = "th";
+  var date_string = date.toString();
+  var digit;
+
+  if (date_string.length === 1) {
+    digit = date_string[0];
+  } else if (date_string[0] !== "1") {
+    digit = date_string[1];
+  }
+
+  if (digit === "1") {
+    suffix = "st";
+  } else if (digit === "2") {
+    suffix = "nd";
+  } else if (digit === "3") {
+    suffix = "rd";
+  }
+
+  return date + suffix;
+}
+var today = new Date();
+function formattedDay(date) {
+  var days_of_week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days_of_week[date.getDay()];
+}
+
+function formattedMonth(date) {
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return months[date.getMonth()];
+}
+
+function formattedDate(date) {
+  var day = formattedDay(date),
+      month = formattedMonth(date); 
+  console.log("Today's day is " + day + ", " + month + " " + dateSuffix(date.getDate()));
+}
+
+// get year returns number of years since 1900
+function formattedYear(year) {
+  return year.getYear() + 1900;
+}
+
+function formattedTime(date) {
+  var hours = date.getHours().toString();
+  var minutes = date.getMinutes().toString();
+  if (hours.length === 1) {
+    hours = "0" + hours; 
+  } 
+  if (minutes.length === 1) {
+    minutes = "0" + minutes;
+  }    
+
+  return hours + ":" + minutes;
+}
+
+formattedDate(today);
+console.log(today.getTime());
+var tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+formattedDate(tomorrow);
+
+var next_week = new Date(today.getDate() + 7);
+console.log(next_week.toDateString() == today.toDateString());
+console.log(formattedTime(today));
