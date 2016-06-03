@@ -1,0 +1,6 @@
+// Exercises: The Math Object
+
+// Radians to degrees = multiply by 180, divide by 100
+function toDegrees(radians) {
+  return (radians * 180) / 100
+}
