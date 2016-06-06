@@ -1,5 +1,27 @@
 (function() {
+  var findObjs = function(element, props, multiple) {
+    var match = multiple ? [] : undefined;
+    element.some(function(obj) {
+      var all_match = true;
+      for (var prop in props) {
+        if (!(prop in obj) || obj[prop] !== props[prop] ) {
+          all_match = false;
+        }        
+      }
+      if (all_match) {
+        if (multiple) {
+          match.push(obj);
+        }
+        else {
+          match = obj;
+          return true;    
+        }
+      }
+    });
+    return match;
+  };
   var _ = function(element) {
+    
     u = {
       first: function() {
         return element[0];
@@ -45,25 +67,62 @@
         return sampled;
       },
       findWhere: function(props) {
-        var match;
-
-        element.some(function(obj) {
-          var all_match = true;
-
-          for (var prop in props) {
-            if (!(prop in obj) || obj[prop] !== props[prop] ) {
-              all_match = false;
-            }        
-          }
-
-          if (all_match) {
-            match = obj;
-            return true;    
+        return findObjs(element, props, false);
+      },
+      where: function(props) {
+        return findObjs(element, props, true);
+      },
+      pluck: function(query) {
+        var vals = [];
+        element.forEach(function(obj) {
+          if (obj[query]) {
+            vals.push(obj[query]);
           }
         });
-        return match;
+        return vals;
+      },
+      keys: function() {
+       var keys = [];
+       for (var prop in element) {
+         keys.push(prop);
+       } 
+       return keys;
+      },
+      values: function() {
+        var values = [];
+        for (var prop in element) {
+          values.push(element[prop]);
+        }
+        return values;
+      },
+      pick: function() {
+        var args = [].slice.call(arguments),
+            new_obj = {};
+        args.forEach(function(prop) {
+          if (prop in element) {
+            new_obj[prop] = element[prop];
+          }
+        });
+        return new_obj;
+      },
+      omit: function() {
+        var args = [].slice.call(arguments),
+            new_obj = {}; 
+        args.forEach(function(prop) {
+          if (!(prop in element)) {
+            new_obj[prop] = element[prop];
+          }
+        });
+        return new_obj;
+      },
+      has: function(prop) {
+        return {}.hasOwnProperty.call(element, prop); 
       }
     };
+
+    (["isElement", "isArray", "isObject", "isFunction", "isBoolean", "isString", "isNumber"]).forEach(function(method) {
+      u[method] = function() { _[method].call(u, element); }
+    });
     return u;
   };
 
@@ -78,7 +137,40 @@
     }
     return range;
   };
+
+  _.extend = function() {
+   var args = [].slice.call(arguments),
+       old_obj = args.pop(),
+       new_obj = args[args.length - 1];
+   for(var prop in old_obj) {
+     new_obj[prop] = old_obj[prop];
+   }
+   return args.length === 1 ? new_obj : _.extend.apply(_, args);
+  };
+
+  _.isElement = function(obj) {
+    return obj && obj.nodeType === 1;
+  };
+
+  _.isArray = Array.isArray || function() {
+    return toString.call(obj) === "[object Array]";  
+  };
+
+  _.isObject = function(obj) {
+    var type = typeof obj;
+
+    return type === "function" || type === "object" && !!obj;
+  };
+
+  _.isFunction = function(obj) {
+    var type = typeof obj;
+    return type === "function";
+  };
+
+  (["Boolean", "String", "Number"]).forEach(function(method) {
+    _["is" + method] = function(obj) {
+      return toString.call(obj) === "[object " + method + "]";
+    };
+  });
   window._ = _;
 })();
-
-
