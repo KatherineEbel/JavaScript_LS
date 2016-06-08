@@ -1,0 +1,40 @@
+html, body {
+  padding: 25px 0;
+  margin: 0;
+  background: #780e24;
+}
+
+h1 {
+  font-size: 1.4em;
+  color: #16997c;
+}
+
+main {
+  max-width: 450px;
+  padding: 20px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+fieldset {
+  border: none;
+}
+
+input[type="text"] {
+  width: 40px;
+  height: 30px;
+  vertical-align: top;
+  font: normal 24px monospace;
+  border: 1px solid #ccc;
+  border-radius 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius 4px;
+  background: linear-gradient(to bottom, #f0f0f0 0%, #d5d5d5 100%);
+}
