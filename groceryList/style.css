@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 25px 0;
+  margin: 0;
+  color: #16997C; 
+  background: #5BCCB3;
+  font: normal 20px Helvetica, Arial, sans-serif;
+}
+
+main {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+}
+
+fieldset {
+  border: none;
+}
+
+label {
+  font-weight: bold;
+}
+
+label, input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 80px;
+  height: 50px;
+  font: normal 24px Georgia, Palatino, serif;
+  line-height: 50px;
+  border: 1px solid #ccc;
+  border-radius 4px;
+}
+
+input[type="submit"] {
+   display: block;
+   width: 100%;
+   padding: 15px 0;
+   margin-top: 20px;
+   font: normal 20px Helvetica, Arial, sans-serif;
+   color: #ffffff;
+   text-shadow: 1px 1px 5px rgba(80, 80, 80, .8);
+   border: 1px solid #91112C;
+   box-shadow: 0 0 1px 1px #780e24;
+   border-radius: 11px;
+   background: linear-gradient(to bottom, #CC183E 0%, #780E24 100%);
+}    
+
+input#item { width: 100%; }
+
+#groceries {
+  padding: 20px;
+}
+
+#groceries h1 {
+   text-align: center;
+   color: #CC183E;
+}
+
+#groceries ul li {
+  padding: 10px;
+}
+
+li + li {
+  border-top: 1px solid #CECECE;
+}
