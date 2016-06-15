@@ -1,0 +1,370 @@
+@import url("whitespace-reset.css");
+
+body {
+  background: #252840 url("images/bg_body.gif");
+  font: normal 20px "Avenir", Helvetica, Arial, sans-serif;
+  text-align: center;
+  padding: 75px 0 0 0;
+  color: #45494D;
+}
+
+a {
+  text-decoration: none;
+  color: #3e59b2;
+}
+
+.column {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+main {
+  background-color: #fff;
+  padding: 75px 0 0 0;
+}
+
+article {
+  padding: 0 110px 100px 110px;
+}
+
+header h1 {
+  display: inline-block;
+  width: 298px;
+  height: 243px;
+  margin: 0 auto 50px auto;
+  text-indent: -9999px;
+  background: transparent url("images/logo.png") 0 0 no-repeat;
+}
+
+header h1 a {
+  color: #fff;
+}
+
+h3 {
+  color: #3E98B2;
+  font-size: 24px;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+h2:before,
+h2:after {
+  display: inline-block;
+  padding: 0 24px;
+  font-size: 22px;
+  line-height: 22px;
+  vertical-align: middle;
+  content: "\2022";
+}
+
+nav {
+  padding-bottom: 45px;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+nav li {
+  display: inline;
+  padding: 0 42px;
+}
+
+nav a {
+ text-decoration: none;
+ color: #cacaca;
+ font-size: 26px;
+} 
+
+nav a.active {
+  font-weight: bold;
+  color: #6db9ff;
+}
+
+footer {
+  background: #E7E7E7;
+  padding: 80px 0;
+  color: #b2b2b2;
+}
+
+footer p {
+  padding-bottom: 40px;
+}
+
+footer li {
+  display: inline;
+  text-decoration: none;
+  padding: 0 62px;
+}
+
+.social::before {
+  display: inline-block;
+  height: 46px;
+  width: 46px;
+  background: transparent url("images/icons_social-media.png") 0 0 no-repeat;
+  vertical-align: middle;
+  content: "";
+}
+
+.facebook::before {
+  background-position: 0 -46px;
+}
+
+.email::before {
+  background-position: 0 -92px;
+}
+
+.instagram::before {
+  background-position: 0 100%;
+}
+
+
+/* project page specific css */
+
+#projects figure {
+  color: #3e59b2;
+  padding: 0 0 55px 0;
+}
+
+#projects article {
+  padding-bottom: 50px;
+}
+
+#projects article + article {
+  padding-top: 60px;
+  border-top: 1px solid #ccc;
+}
+
+#projects article p {
+  padding: 0 110px;
+  margin: 0;
+}
+
+#projects figure img {
+  display: block;
+  width: 100%;
+}
+
+/* team page specific css */
+
+#team article {
+  padding: 0 0 100px 0;
+}
+
+#team p {
+  padding: 0 110px 100px 110px;
+}
+
+#team ul {
+  padding: 0;
+}
+
+#team li {
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 24px;
+}
+
+#team li img {
+  display: block;
+  margin: 0 0 20px 0;
+}
+
+#team li a {
+  text-decoration: none;
+  color: #3e59b2;
+}
+
+/* team detail specific css */
+
+.team-detail {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(0,0,0,0.8);
+}
+
+.team-detail section {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  width: 660px;
+  margin-left: -400px;
+  z-index: 3;
+  text-align: left;
+  background: #fff;
+  padding: 125px 70px 70px 70px;
+  text-align: left;
+}
+
+.team-detail img {
+  display: inline-block;
+  width: 96px;
+  vertical-align: middle;
+  margin: 0 30px 20px 0;
+}
+
+.team-detail h3 {
+  display: inline-block;
+  font-weight: normal;
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.team-detail p {
+  padding: 0;
+  font-size: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  cursor: pointer;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background: transparent url("images/icon_close.png") 0 0 no-repeat;
+}
+
+@media (max-width: 875px) {
+
+  #team li {
+    width: 48%;
+    padding: 0 0 30px 0;
+  }  
+
+  #team li img {
+    margin: 0 auto 25px auto;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  body {
+    padding-top: 65px;
+  }
+
+  header h1 {
+    width: 223px;
+    height: 182px;
+    margin-bottom: 30px;
+    background-size: cover;
+  }
+
+  nav {
+    padding-bottom: 20px;
+  }
+
+  nav li {
+    padding: 0 34px;
+  }
+
+  main {
+    margin: 0 auto;
+    padding-top: 40px;
+  }
+  
+  article {
+    padding: 0 40px 50px 40px;
+  }
+
+  article p {
+    text-align: justify;
+  }
+
+  footer {
+    padding: 35px 0;
+  }
+
+  footer li  {
+    padding: 0 32px; 
+  }
+
+  #projects article p {
+    padding: 0 30px;
+  }
+
+  .team-detail section {
+    left: 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  
+  body {
+    padding-top: 0;
+    font-size: 16px;
+  }
+
+  header {
+    padding: 0 10px;
+  }
+
+  header h1 {
+    float: left;
+    width: auto;
+    height: 40px;
+    padding: 42px 0 0 55px;
+    text-indent: 10px;
+    font-size: 20px; color: #fff;
+    background-position: -22px 31px;
+    background-size: 98px auto;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  h2::before,
+  h2::after {
+    vertical-align: 0;
+  }
+
+  #team p {
+    padding: 0 30px 40px 30px;
+  }
+
+  nav {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    text-align: right;
+    overflow: hidden;
+  }
+
+  nav li {
+    padding-right: 20px;
+    display: block;
+  }
+
+  nav a {
+    font-size: 16px;
+  }
+
+  main {
+    clear: both;
+  }
+
+  footer {
+    padding: 20px 0;
+  }
+
+  footer p {
+    padding: 20px 20px;
+  }
+
+  footer li {
+    padding: 0 18px;
+  }
+  
+} 

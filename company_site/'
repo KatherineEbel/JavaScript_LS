@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css" />
+  <title>Team detail</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="modal.js"></script>
+</head>
+<body>
+  <header>
+    <h1><img src="images/logo.png" alt="Space Design Logo"></h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a class="active" href="team.html">Team</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="team-detail">
+    <section>
+      <img class="close-btn" src="images/icon_close.png" alt="close button">
+      <figure>
+        <img src="images/img_kevin.jpg" alt="Kevin"/>
+      </figure>
+      <h3>Name</h3>
+      <p>
+        Elit tenetur eius architecto est facere. Similique nihil error deleniti laborum magnam. Reprehenderit inventore blanditiis esse rem eius similique. Ipsa neque reprehenderit accusamus quibusdam deserunt veniam recusandae iure harum quam eaque et placeat accusantium. Doloribus perspiciatis ullam at iure quo sed fugiat quas laborum. Ratione itaque voluptas hic consequatur quo! Dolore voluptate tenetur voluptates ipsa ipsam libero minus ducimus ullam a at nihil quidem veritatis tempora repellat in reprehenderit ipsam. Sint.
+      </p>
+      
+    </section>
+  </main>
+  <footer>
+    <p>
+      Dolor modi repellendus consequatur officia numquam inventore, vero, iure sit ex consectetur, mollitia. Cumque suscipit amet!
+    </p>
+    
+    <ul>
+      <li><a class="social twitter" href=""></a></li>
+      <li><a class="social facebook" href=""></a></li>
+      <li><a class="social email" href=""></a></li>
+      <li><a class="social instagram" href=""></a></li>
+    </ul>
+  </footer>
+</body>
+</html>
+
+
