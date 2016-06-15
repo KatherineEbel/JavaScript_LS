@@ -1,0 +1,66 @@
+@import url("whitespace-reset.css");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  font: normal 16px sans-serif;
+}
+
+main {
+  display: block;
+  max-width: 1000px;
+  min-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  padding: 10px 0;
+  font-size: 36px;
+}
+
+figure {
+  width: 100%;
+}
+
+figure img {
+  border: 10px solid #fff;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+figure figcaption {
+  color: #fff;
+  margin: 10px 0; 
+}
+
+ul {
+  padding: 0;
+  margin: 0 -15px;
+  font-size: 0;
+}
+
+ul li {
+  display: inline-block;
+  width: 25%;
+  padding: 0 15px;
+  vertical-align: top;
+}
+
+li img {
+  border: 3px solid #fff;
+}
+
+li.active img {
+  border-color: dodgerblue;
+}
