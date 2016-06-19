@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="stylesheets/style.css" media="all">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="javascripts/animations.js"></script>
+  <title>Dynamic Animations</title>
+</head>
+<body>
+  <main>
+    <div id="canvas">
+      
+    </div> 
+    <a href="#" id="animate">Start</a>
+    <a href="#" id="stop">Stop</a>
+    <form action="">
+      <fieldset>
+        <h1>Add a shape</h1>
+        <h2>Type</h2>
+        <ul>
+          <li>
+            <label>
+              <input id="square" type="radio" name="shape_type" value="square">
+              Square
+            </label>
+          </li>
+          <li>
+            <label>
+              <input id="circle" type="radio" name="shape_type" value="circle">
+              Circle
+            </label>
+          </li>
+          <li>
+            <label>
+              <input id="star" type="radio" name="shape_type" value="star">
+              Star
+            </label>
+          </li>
+        <label>Starting Point</label>
+        <input id="start_x" type="number" name="" placeholder="x:">
+        <input id="start_y" type="number" name="" placeholder="y:">
+        <label>Ending Point</label>
+        <input id="end_x" type="number" name="" placeholder="x:">
+        <input id="end_y" type="number" name="" placeholder="y:">
+        <input type="submit" value="Add">
+      </fieldset>
+    </form>
+  </main>
+</body>
+</html>
