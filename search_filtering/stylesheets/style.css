@@ -1,0 +1,55 @@
+body {
+  font: normal 13px Helvetica, Arial, sans-serif;
+  background: #eee196;
+}
+
+
+.content {
+  width: 1000px; 
+  background: #fff;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+main {
+  float: right;
+  width: 80%;
+}
+
+ul {
+  list-style: none;
+
+}
+
+main ul {
+  padding: 0 20px 20px 0;
+}
+
+main li {
+  padding: 15px 20px;
+}
+
+main li + li {
+  border-top: 1px solid #ccc;
+}
+
+main li:hover {
+  background: #99f099;
+}
+
+aside {
+  overflow: auto;
+  padding-top: 30px;
+  margin-left: -30px;
+}
+
+aside ul {
+  padding: 40px;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border: none;
+}
