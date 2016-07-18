@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="shape_stamper.js"></script>
+  <link rel="stylesheet" href="shape_stamper.css" media="all">
+  <title>Shape Stamper</title>
+</head>
+<body>
+  <main>
+    <canvas id="canvas" width="800px" height="500px"></canvas>
+    <ul>
+        <li><a class="drawing_method" data-method="circle" href="#">Circle</a></li>
+        <li><a class="drawing_method" data-method="square" href="#">Square</a></li>
+        <li><a class="drawing_method" data-method="triangle" href="#">Triangle</a></li>
+        <li><a id="clear" href="#">Clear</a></li>
+        <li>
+        <form action="" method="get">
+          <fieldset> 
+            <label >Color:</label>
+            <input type="text">
+          </fieldset>
+        </form>
+        </li>
+    </ul>
+  </main>
+</body>
+</html>

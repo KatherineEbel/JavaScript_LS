@@ -1,0 +1,55 @@
+body {
+  font: normal 16px Helvetica, Arial, sans-serif;
+  background: #57579A;
+}
+
+main {
+  width: 900px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+canvas {
+  display: block;
+  margin: 10px auto;
+  border: 3px solid #171A1F;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+ul {
+  width: 800px;
+  padding: 25px 0 0 0;
+  margin: 0 auto;
+  list-style: none;
+}
+
+li {
+  display: inline-block;
+  padding: 0 5px 0 0;
+}
+
+a {
+  display: inline-block;
+  padding: 8px 20px;
+  text-decoration: none;
+  color: #333;
+  background: #ececec;
+  border-radius: 4px;
+}
+
+input {
+  height: 30px;
+  font-size: 16px;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+}
+
+a.active {
+  color: #fff;
+  background: #0066cc;
+}
+
+fieldset {
+  border: none;
+}
+
