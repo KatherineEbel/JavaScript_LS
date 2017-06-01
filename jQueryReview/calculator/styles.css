@@ -1,0 +1,31 @@
+// styles
+body {
+  background: #4C339D;
+}
+
+main {
+  text-align: center;
+  margin: 0 auto;
+  background: #4C339D;
+  padding: 50px;
+  width: 350px;
+  height: 350px;
+}
+
+h2 {
+  color: white;
+  font-size: 2em;
+}
+
+input, select {
+  height: 40px;
+  width: 80px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 1.5em;
+}
+
+input[type=submit] {
+  width: 40px;
+  background: white;
+}

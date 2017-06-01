@@ -1,0 +1,50 @@
+html {
+  width: 960px;
+  background: #EEE196;
+}
+body {
+  margin: 0 auto;
+  width: 90%;
+  overflow: auto;
+}
+
+.container {
+  margin: 0 auto;
+  background: white;
+  overflow: auto;
+}
+
+main {
+  float: right;
+  width: 75%;
+  padding: 5px;
+}
+
+main li:hover {
+  background: #0DFF96;
+}
+
+aside {
+  float: left;
+  margin-top: 20px;
+  padding: 5px;
+  width: 20%;
+}
+
+.game-list {
+  list-style: none;
+}
+
+.game-list li {
+  width: 80%;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.category-list {
+  list-style: none;
+}
+
+input[type=checkbox] {
+  margin-right: 5px !important;
+}

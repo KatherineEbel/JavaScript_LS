@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Events</title>
+</head>
+<body>
+  <form action="">
+    <fieldset>
+      <input type="text" maxlength=1>
+      <a style="display: block" href="#">Toggle</a>
+      <input type="submit" value="Submit">
+    </fieldset>
+    <div id="accordion">
+      <p>Sit minus quam laudantium porro quo! Aperiam quaerat a amet itaque sunt Cum temporibus reprehenderit asperiores repudiandae impedit, sed sapiente? Similique quas aspernatur porro accusamus error. Inventore rerum laborum explicabo</p>
+    </div>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script>
+    $(function() {
+      let $key;
+      $('a').click(function(event) {
+        event.preventDefault();
+        $('#accordion').slideToggle();
+      });
+      $('form').submit(function(event) {
+        event.preventDefault();
+        let $input = $('input[type=text]');
+        $key = $input.val();
+        $input.val('');
+        $(document).off('keypress').keypress(function(event) {
+          if ($key !== event.key) { return; }
+          $('a').trigger('click');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

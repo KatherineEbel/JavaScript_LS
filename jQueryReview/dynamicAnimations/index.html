@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css" media="all">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <title>Dynamic Animations</title>
+</head>
+<body>
+  <main>
+    <div class="canvas"></div>
+    <a href="#">Start</a>
+    <span> | </span>
+    <a href="#">Stop</a>
+    <form action="">
+      <h2>Add a shape</h2>
+      <h3>Type</h3>
+      <label for="square"><input id="square" type="radio" name="shape" value="square" required>Square</label>
+      <label for="circle"><input id="circle" type="radio" name="shape" value="circle" required>Circle</label>
+      <label for="star"><input id="star" type="radio" name="shape" value="star" required>Star</label>
+      <label for="start-x">Starting Point</label>
+        <input id="start-x" name="start-x" type="number" placeholder="x:" required>
+        <input id="start-y" name="start-y" type="number" placeholder="y:" required>
+      <label for="end-x">Ending Point </label>
+        <input id="end-x" name="end-x" type="number" placeholder="x:" required>
+        <input id="end-y" name="end-y" type="number" placeholder="y:"required >
+      <input type="submit" value="Add">
+    </form>
+  </main>
+</body>
+</html>
