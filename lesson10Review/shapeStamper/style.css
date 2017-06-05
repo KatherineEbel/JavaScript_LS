@@ -1,0 +1,62 @@
+body {
+  width: 960px;
+  background: #1e90ff;
+  font: 1.2em Helvetica Arial sans-serif;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid #a0a0a0;
+}
+
+ul {
+  width: 800px;
+  padding: 25px 0 0 0;
+  margin: 0 auto;
+}
+
+li {
+  display: inline-block;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px;
+  background: #f76f6f;
+  color: white;
+  border: 2px solid #a0a0a0;;
+  border-radius: 10px;
+}
+
+a.active,
+a:hover {
+  background: #ff7979;
+}
+
+form, fieldset {
+  display: inline-block;
+  padding: 0;
+  border: none;
+}
+
+label, button,
+input {
+  font-size: 1.2em;
+}
+
+label {
+  color: white;
+}
+
+input[type=text] {
+  width: 200px;
+  padding: 2px;
+  margin-top: -2px;
+  margin-left: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
