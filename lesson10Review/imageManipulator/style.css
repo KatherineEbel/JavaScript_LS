@@ -1,0 +1,26 @@
+body {
+  width: 960px;
+  margin: 0 auto;
+  font: 1.2em Helvetica Arial sans-serif;
+}
+
+section {
+  width: 460px;
+  margin: 10px;
+  overflow: auto;
+}
+
+section:first-of-type {
+  float: left;
+}
+
+section:last-of-type {
+  float: right;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
