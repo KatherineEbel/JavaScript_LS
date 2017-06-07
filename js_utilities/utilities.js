@@ -6,7 +6,7 @@
       for (var prop in props) {
         if (!(prop in obj) || obj[prop] !== props[prop] ) {
           all_match = false;
-        }        
+        }
       }
       if (all_match) {
         if (multiple) {
@@ -14,14 +14,13 @@
         }
         else {
           match = obj;
-          return true;    
+          return true;
         }
       }
     });
     return match;
   };
   var _ = function(element) {
-    
     u = {
       first: function() {
         return element[0];
@@ -30,25 +29,18 @@
         return element[element.length - 1];
       },
       without: function() {
-        var new_arr = [],  
+        var new_arr = [],
             args = Array.prototype.slice.call(arguments);
-        element.forEach(function(el) {
-          if (args.indexOf(el) === -1) {
-            new_arr.push(el);
-          }
-        });
-        return new_arr;
+        return element.filter(el => args.indexOf(el) === -1);
       },
       lastIndexOf: function(search) {
-        var idx = -1;
-        
-        for (var i = element.length - 1; i >= 0; i--) {
-          if (element[i] === search) {
-            idx = i;
-            break;
-          } 
-        }
-        return idx;
+        return element.reduceRight((lastIdx, curVal, curIdx) => {
+          if(lastIdx !== -1) { return lastIdx }
+          if (curVal === search) {
+            lastIdx = curIdx;
+          }
+          return lastIdx;
+        }, -1);
       },
       sample: function(qty) {
         var sampled = [],
@@ -73,50 +65,41 @@
         return findObjs(element, props, true);
       },
       pluck: function(query) {
-        var vals = [];
-        element.forEach(function(obj) {
+        return element.reduce((vals, obj) => {
           if (obj[query]) {
             vals.push(obj[query]);
           }
-        });
-        return vals;
+          return vals;
+        },[]);
       },
       keys: function() {
-       var keys = [];
-       for (var prop in element) {
-         keys.push(prop);
-       } 
-       return keys;
+       return Object.getOwnPropertyNames(element)
       },
       values: function() {
-        var values = [];
-        for (var prop in element) {
-          values.push(element[prop]);
-        }
-        return values;
+        return Object.getOwnPropertyNames(element).map(prop => element[prop]);
+        // alternate implementation
+        // var values = [];
+        // for (var prop in element) {
+        //   values.push(element[prop]);
+        // }
+        // return values;
       },
       pick: function() {
-        var args = [].slice.call(arguments),
-            new_obj = {};
-        args.forEach(function(prop) {
-          if (prop in element) {
-            new_obj[prop] = element[prop];
-          }
-        });
-        return new_obj;
+        var args = [].slice.call(arguments);
+        return args.reduce((newObj, prop) => {
+          if (prop in element) { newObj[prop] = element[prop] }
+          return newObj;
+        },{});
       },
       omit: function() {
-        var args = [].slice.call(arguments),
-            new_obj = {}; 
-        args.forEach(function(prop) {
-          if (!(prop in element)) {
-            new_obj[prop] = element[prop];
-          }
-        });
-        return new_obj;
+        let args = [].slice.call(arguments);
+        return args.reduce((newObj, prop) => {
+          if (!prop in element) { newObj[prop] = element[prop] }
+          return newObj;
+        },{});
       },
       has: function(prop) {
-        return {}.hasOwnProperty.call(element, prop); 
+        return {}.hasOwnProperty.call(element, prop);
       }
     };
 
@@ -139,13 +122,13 @@
   };
 
   _.extend = function() {
-   var args = [].slice.call(arguments),
-       old_obj = args.pop(),
-       new_obj = args[args.length - 1];
-   for(var prop in old_obj) {
-     new_obj[prop] = old_obj[prop];
-   }
-   return args.length === 1 ? new_obj : _.extend.apply(_, args);
+    var args = [].slice.call(arguments),
+        old_obj = args.pop(),
+        new_obj = args[args.length - 1];
+    for(var prop in old_obj) {
+      new_obj[prop] = old_obj[prop];
+    }
+    return args.length === 1 ? new_obj : _.extend.apply(_, args);
   };
 
   _.isElement = function(obj) {
