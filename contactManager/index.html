@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/styles.css" media="all">
+  <meta charset="UTF-8">
+  <title>Contact Manager</title>
+</head>
+<body>
+  <header>
+    <h1>Contact Manager</h1>
+    <p>Using jQuery, Localstorage, and Handlebars</p>
+  </header>
+  <div class="slide">
+    <main>
+      <a class="button add-contact" href="#">Add Contact</a>
+      <input id="search" type="search" name="search" placeholder="Search">
+    </main>
+    <section id="contacts">
+      <h3>There are no contacts.</h3>
+      <a class="button add-contact" href="#">Add Contact</a>
+    </section>
+  </div>
+  <footer>
+    <p>Developed by Katherine Ebel</p>
+  </footer>
+  <script id="form-template" type="text/x-handlebars-template">
+    <form class="slide-down" action="#">
+      <h2>Create Contact</h2>
+      <fieldset>
+        <input type="hidden" name="contact-id" value="{{id}}">
+        <label for="name">Full name:</label>
+        <input id="name" type="text" name="name" value="{{fullName}}">
+        <label for="email">Email address:</label>
+        <input id="email" type="email" name="email" value="{{email}}">
+        <label for="phone">Phone number:</label>
+        <input id="phone" type="phone" name="phone" value="{{phone}}">
+      </fieldset>
+      <input class="button" type="submit" value="Submit">
+      <a id="cancel" class="button" href="#">Cancel</a>
+    </form>
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  <script src="javascripts/manager.js"></script>
+</body>
+</html>
