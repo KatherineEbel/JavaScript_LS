@@ -17,28 +17,53 @@
       <input id="search" type="search" name="search" placeholder="Search">
     </main>
     <section id="contacts">
-      <h3>There are no contacts.</h3>
-      <a class="button add-contact" href="#">Add Contact</a>
     </section>
   </div>
   <footer>
     <p>Developed by Katherine Ebel</p>
   </footer>
-  <script id="form-template" type="text/x-handlebars-template">
-    <form class="slide-down" action="#">
+  <script id="contactsTemplate" type="text/x-handlebars-template">
+    {{#each contacts}}
+      {{> contact}}
+    {{else}}
+      <h3>There are no contacts.</h3>
+      <a class="button add-contact" href="#">Add Contact</a>
+    {{/each }}
+  </script>
+  <script id="formTemplate" type="text/x-handlebars-template">
+    <form id="contactForm" action="#">
       <h2>Create Contact</h2>
       <fieldset>
-        <input type="hidden" name="contact-id" value="{{id}}">
+        <input type="hidden" name="contact-id" value="{{id}}" required>
         <label for="name">Full name:</label>
-        <input id="name" type="text" name="name" value="{{fullName}}">
+        <input id="name" type="text" name="name" value="{{name}}" required>
         <label for="email">Email address:</label>
-        <input id="email" type="email" name="email" value="{{email}}">
+        <input id="email" type="email" name="email" value="{{email}}" required>
         <label for="phone">Phone number:</label>
-        <input id="phone" type="phone" name="phone" value="{{phone}}">
+        <input id="phone" type="phone" name="phone" value="{{phone}}" required>
       </fieldset>
-      <input class="button" type="submit" value="Submit">
+      <input id="save" class="button" type="submit" value="Submit">
       <a id="cancel" class="button" href="#">Cancel</a>
     </form>
+  </script>
+  <script id="contactTemplate" type="text/x-handlebars-template">
+    <article>
+      <h2>{{name}}</h2>
+      <span>
+        <h4>Phone Number:</h4>
+        <p>{{phone}}</p>
+      </span>
+      <span>
+        <h4>Email:</h4>
+        <p>{{email}}</p>
+      </span>
+      <form action="#">
+        <input type="hidden" value="{{id}}">
+        <input class="button" type="button" value="Edit">
+        <input class="button" type="button" value="Delete">
+      </form>
+    </article>
+    </li>
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>

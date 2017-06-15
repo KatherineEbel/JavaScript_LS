@@ -145,3 +145,48 @@ form input {
 input.button {
   float: none;
 }
+
+#edit, #delete {
+  padding: 2px;
+}
+
+#contacts {
+  overflow: auto;
+}
+
+article {
+  display: block;
+  float: left;
+  margin: 5px;
+  width: 200px;
+  text-align: left;
+  border-bottom: 1px solid #cecece;
+}
+
+article span {
+  display: block;
+  margin: 5px 0;
+}
+
+article h4,
+article p {
+  margin: 0;
+  padding: 0;
+}
+
+article form {
+  margin-left: 0;
+  padding-left: 0;
+  text-align: left;
+  display: inline-block;
+}
+
+article input.button {
+  margin: 5px;
+  padding: 0 8px;
+  width: auto;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+
