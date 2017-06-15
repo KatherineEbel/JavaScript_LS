@@ -8,7 +8,6 @@ body {
   margin-bottom: 80px;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  box-sizing: border-box;
 }
 
 header {
@@ -25,6 +24,9 @@ header h1 {
   font-size: 3em;
 }
 
+h1, h2, h3, p {
+  margin: 10px;
+}
 header p {
   font-size: 1.5em;
   color: #c7a7f9;
@@ -69,22 +71,30 @@ a {
   text-decoration: none;
 }
 
-.button, input {
-  display: block;
+#search {
+  margin-left: 10px;
+  -webkit-appearance: none;
+}
+
+.button,
+input,
+select {
+  display: inline-block;
   margin: 10px auto;
   border-radius: 8px;
 }
 
-input {
-  height: 30px;
+input, select {
+  height: 40px;
   width: 320px;
+  box-sizing: border-box;
   padding: 10px;
   font-size: 1.2em;
   border: 1px solid #cecece;
+  /* -webkit-appearance: none; */
 }
 
 .button {
-  width: 170px;
   padding: 10px;
   background: white;
   color: #654B8D;
@@ -92,13 +102,18 @@ input {
   transition: color, background 0.4s ease-in-out;
 }
 
+.selected,
 .button:hover {
   background: #644A8C;
   color: white;
 }
 
-form {
+#contactForm,
+#tagForm {
   display: none;
+}
+
+form {
   width: 70%;
   margin: 10px auto;
   text-align: center;
@@ -108,7 +123,6 @@ form a.button,
 form input.button {
   display: inline-block;
   width: 80%;
-  box-sizing: content-box;
 }
 
 form h2 {
@@ -121,7 +135,6 @@ form h2 {
 fieldset {
   margin: 0 auto;
   width: 75%;
-
   border: none;
 }
 
@@ -136,10 +149,10 @@ label {
   clear: both;
 }
 
-form input {
+form input,
+select {
   display: inline-block;
   float: left;
-  margin-left: 10px;
 }
 
 input.button {
@@ -150,7 +163,7 @@ input.button {
   padding: 2px;
 }
 
-#contacts {
+#contacts, main {
   overflow: auto;
 }
 
@@ -166,6 +179,16 @@ article {
 article span {
   display: block;
   margin: 5px 0;
+}
+
+h2 {
+  margin: 20px 0;
+  font-size: 2.25em;
+}
+
+article h2,
+article h4 {
+  font-weight: bold;
 }
 
 article h4,
@@ -189,4 +212,21 @@ article input.button {
   font-weight: normal;
 }
 
+.tags ul {
+  margin: 0 auto;
+  padding: 0;
+  display: table;
+}
+
+.tags {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.tags ul li {
+  display: inline-block;
+  float: left;
+  margin: 5px;
+  text-align: center;
+}
 

@@ -1,6 +1,7 @@
 function ContactManager(state) {
   this.currentId = state === null ? 0 : state.currentId;
   this.contacts = state === null ? [] : state.contacts;
+  this.tags = state === null ? ['Family', 'Co-Workers', 'Friends'] : state.tags;
   this.compileTemplates();
   this.renderContacts();
   this.init();
@@ -16,109 +17,75 @@ ContactManager.prototype.compileTemplates = function() {
     that.templates[$(this).attr('id')] = Handlebars.compile($(this).html());
   });
   Handlebars.registerPartial('contact', this.templates.contactTemplate);
+  Handlebars.registerHelper('selected', function(option, value) {
+    return option === value ? ' selected' : '';
+  });
 };
 
-// bind events to manager
-ContactManager.prototype.bind = function() {
-  $('#search').on('input, keyup', this.filterContacts.bind(this));
-  $(document).on('click', '.add-contact', this.add.bind(this));
-  $(document).on('click', '#cancel', this.cancel.bind(this));
-  $(document).on('click', '#save', this.saveCurrentState.bind(this));
-  $(document).on('blur', '#name, #email, #phone', this.update.bind(this));
-  $(document).on('click', '[type=button]', this.modifyContacts.bind(this));
-};
-
-// mutates currentId so no contacts will have same ID
-ContactManager.prototype.getNextId = function() {
-  return ++this.currentId;
-};
-
-// returns contact for given id
-ContactManager.prototype.getContact = function(contactId) {
-  return this.contacts.find(contact => contact.id === contactId);
-};
-
-// adds a contact with and id and displays a form to edit contact details.
-ContactManager.prototype.add = function() {
-  let newContact = Object.create(contact);
-  newContact.id = this.getNextId();
-  this.contacts.push(newContact);
-  this.displayFormFor(newContact);
-};
-
-// hide the contact form
-ContactManager.prototype.hideForm = function() {
-  $('#contactForm').slideToggle().remove();
-  $('.slide').slideToggle();
-};
-
-// if contact hasn't already been saved when cancel is called delete the last contact
-// (which is a partial contact, and roll back currentId for mananger.
-// if contact has been saved, just hide the form.
-ContactManager.prototype.cancel = function(event) {
-  let contactSaved = $('form:visible').find('#name, #email, #phone').filter((idx, el) => {
-    return $(el).val() !== '';
-  }).length === 3;
-  if (!contactSaved) {
-    this.contacts.splice(this.getContact(+$('form:visible').find(':hidden').val()), 1)
-    this.currentId--;
-    this.saveCurrentState();
-    return;
-  }
-  this.renderContacts();
-  this.hideForm();
-};
-
-// called when #contactForm inputs go out of focus
-ContactManager.prototype.update = function(event){
-  let contactId = +$(event.currentTarget).siblings(':hidden').val();
-  this.getContact(contactId)[$(event.currentTarget).attr('id')] = $(event.currentTarget).val();
-};
-
-// display #contactForm for given contact
-ContactManager.prototype.displayFormFor = function(contact) {
-  let $form = $(this.templates.formTemplate(contact));
-  $('.slide').slideToggle();
-  $form.insertAfter('.slide').slideToggle();
-};
-
-// renders all contacts that are currently saved.
 ContactManager.prototype.renderContacts = function() {
   $('#contacts').html(this.templates.contactsTemplate({contacts: this.contacts}));
 };
 
-// saves current contacts and currentId to localStorage for easier recreation at revisit
-ContactManager.prototype.saveCurrentState = function(event) {
-  localStorage.setItem('manager', JSON.stringify(this));
-  if (event) {
-    event.preventDefault();
-    $(event.currentTarget).closest('form').get(0).reset();
-    this.hideForm();
-  }
-  this.renderContacts();
-};
-
-// bind events on creation
 ContactManager.prototype.init = function() {
   this.bind();
 };
 
-// displays form for given contact when edit is clicked
-ContactManager.prototype.edit = function(contact) {
-  this.displayFormFor(contact);
+// bind events to manager
+ContactManager.prototype.bind = function() {
+  $(document).on('submit', e => {
+    e.preventDefault();
+    let formId = $(event.target).attr('id');
+    if (formId === 'tagForm') {
+      this.addTag(e);
+    }
+    this.saveCurrentState();
+    this.renderContacts();
+    this.hideForm($(event.target));
+  });
+  $(document).on('click', '.add-contact', this.createContact.bind(this));
+
+  $(document).on('click.add-tag', '.add-tag', this.displayTagForm.bind(this));
+  $('.tags').on('click', 'a', this.filterByTag.bind(this));
+  $('#search').on('input, keyup', this.filterContacts.bind(this));
+  $(document).on('click', 'input.cancel', this.cancel.bind(this));
+  $(document).on('blur', '#name, #email, #phone, #tag', this.update.bind(this));
+  $(document).on('click', 'input.delete, input.edit', event => {
+    event.preventDefault();
+    let contactId = +$(event.target).siblings(':hidden').val();
+    this[$(event.target).val().toLowerCase()](contactId);
+  });
 };
 
-// removes given contact from savedContacts and saves the new state.
-ContactManager.prototype.delete = function(contact) {
-  this.contacts.splice(this.contacts.indexOf(contact), 1);
-  this.saveCurrentState();
+ContactManager.prototype.displayFormFor = function(contact) {
+  let context = { contact: contact, tags: this.tags };
+  let $form = $(this.templates.contactFormTemplate(context));
+  $('.slide').slideToggle();
+  $form.insertAfter('.slide').slideToggle();
 };
 
-// will call edit or delete with a contact having the id in the hidden input
-ContactManager.prototype.modifyContacts = function(event) {
-  let contactId = +$(event.currentTarget).siblings(':hidden').val();
-  let fn = $(event.currentTarget).val().toLowerCase();
-  this[fn](this.getContact(contactId));
+ContactManager.prototype.displayTagForm = function(e) {
+  e.preventDefault();
+  let $form = $(this.templates.tagFormTemplate(contact));
+  $('.slide').slideToggle();
+  $form.insertAfter('.slide').slideToggle();
+}
+
+ContactManager.prototype.addTag = function(e) {
+  event.preventDefault();
+  let tag = $(event.target).find('#tagName').val();
+  this.tags.push(tag);
+  $('.tags ul').append(`<li><a class="button" href="#">${tag}</a></li>`)
+};
+
+ContactManager.prototype.getNextId = function() {
+  return ++this.currentId;
+};
+
+ContactManager.prototype.createContact = function(e) {
+  let newContact = Object.create(contact);
+  newContact.id = this.getNextId();
+  this.contacts.push(newContact);
+  this.displayFormFor(newContact);
 };
 
 // filters all contacts given a search string.
@@ -140,12 +107,67 @@ ContactManager.prototype.filterContacts = function(event) {
   }
 };
 
+ContactManager.prototype.filterByTag = function(event) {
+  event.preventDefault();
+  $(event.currentTarget).toggleClass('selected');
+  let selectedTags = $('.selected').map((_, el) => $(el).text()).get();
+  $('section').find('article').filter((_, el) => {
+    let contactId = +$(el).find(':hidden').val();
+    return selectedTags.indexOf(this.getContact(contactId).tag) !== -1;
+  });
+};
 
+ContactManager.prototype.getContact = function(contactId) {
+  return this.contacts.find(contact => contact.id === contactId) || -1;
+};
+
+ContactManager.prototype.delete = function (contactId) {
+  this.contacts.splice(this.getContact(contactId), 1);
+  this.renderContacts();
+  this.saveCurrentState();
+};
+
+ContactManager.prototype.edit = function (contactId) {
+  let contact = this.getContact(contactId);
+  this.displayFormFor(contact);
+};
+
+ContactManager.prototype.cancel = function(e) {
+  let $form = $(event.target).closest('form');
+  if ($form.attr('id') === 'tagForm') {
+    this.tags.pop();
+    this.hideForm($form);
+    return;
+  }
+  let contact = this.getContact(+$form.find('input:hidden').val());
+  let isContactComplete = $form.find(':empty').not('.button, :hidden').length === 0;
+  if (!isContactComplete) {
+    this.contacts.splice(this.contacts.indexOf(contact), 1);
+    if (this.currentId > 0) { currentId--; }
+  }
+  this.saveCurrentState();
+  this.hideForm($form);
+};
+
+ContactManager.prototype.hideForm = function($form) {
+  $('.slide').slideToggle();
+  $form.slideToggle().remove();
+};
+
+ContactManager.prototype.update = function(e) {
+  let contactId = +$(e.target).closest('form').find('input:hidden').val();
+  this.getContact(contactId)[$(e.target).attr('id')] = $(e.target).val();
+};
+
+ContactManager.prototype.saveCurrentState = function() {
+  localStorage.setItem('manager', JSON.stringify(this));
+};
 let contact = {
 id: 0,
 name: '',
 email: '',
 phone: '',
+tag: ''
 };
 
 let manager= new ContactManager(JSON.parse(localStorage.getItem('manager')));
