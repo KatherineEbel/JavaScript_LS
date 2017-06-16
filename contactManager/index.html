@@ -12,8 +12,9 @@
     <h1>Contact Manager</h1>
     <p>Using jQuery, Localstorage, and Handlebars</p>
   </header>
-  <div class="slide">
-    <main>
+  <div class="content">
+    <main id="contacts"></main>
+    <aside id="filter">
       <a class="button add-contact" href="#">Add Contact</a>
       <a class="button add-tag" href="#">Add Tag</a>
       <input id="search" type="search" name="search" placeholder="Search">
@@ -23,78 +24,76 @@
           <li><a class="button selected" href="#">Co-Workers</a></li>
           <li><a class="button selected" href="#">Friends</a></li>
         </ul>
-      </div>
-    </main>
-    <section id="contacts">
-    </section>
-  </div>
+      </div> <!-- end tags -->
+    </aside>
+  </div> <!-- end content -->
   <footer>
     <p>Developed by Katherine Ebel</p>
   </footer>
-  <script id="contactsTemplate" type="text/x-handlebars-template">
-    {{#each contacts}}
-      {{> contact}}
-    {{else}}
-      <h3>There are no contacts.</h3>
-      <a class="button add-contact" href="#">Add Contact</a>
-    {{/each }}
-    <p id="search-empty"></p>
-  </script>
-  <script id="tagFormTemplate" type="text/x-handlebars-template">
-    <form id="tagForm" action="#">
-      <label for="tagName">Tag Name:</label>
-      <input id="tagName" type="text" name="tagName" required>
-      <input class="button" type="submit" value="Submit">
-      <input class="button cancel" type="button" value="Cancel">
-    </form>
-  </script>
-  <script id="contactFormTemplate" type="text/x-handlebars-template">
-    <form id="contactForm" action="#">
-      <h2>Create Contact</h2>
-      <fieldset>
-        <input type="hidden" name="contact-id" value="{{contact.id}}" required>
-        <label for="name">Full name:</label>
-        <input id="name" type="text" name="name" value="{{contact.name}}" required>
-        <label for="email">Email address:</label>
-        <input id="email" type="email" name="email" value="{{contact.email}}" required>
-        <label for="phone">Phone number:</label>
-        <input id="phone" type="phone" name="phone" value="{{contact.phone}}" required>
-        <label for="tag">Tag:</label>
-        <select id="tag" name="tag">
-          {{#each tags}}
-            <option value="{{this}}" {{selected this ../contact.tag}}>{{this}}</option>
-          {{/each}}
-        </select>
-      </fieldset>
-      <input id="save" class="button" type="submit" value="Submit">
-      <input class="button cancel" type="button" value="Cancel">
-    </form>
-  </script>
-  <script id="contactTemplate" type="text/x-handlebars-template">
-    <article>
-      <h2>{{name}}</h2>
-      <span>
-        <h4>Phone Number:</h4>
-        <p>{{phone}}</p>
-      </span>
-      <span>
-        <h4>Email:</h4>
-        <p>{{email}}</p>
-      </span>
-      <form id="editForm" action="#">
-        <input type="hidden" value="{{id}}">
-        <input class="button edit" type="button" value="Edit">
-        <input class="button delete" type="button" value="Delete">
+    <script id="contactsTemplate" type="text/x-handlebars-template">
+      {{#each contacts}}
+        {{> contact}}
+      {{else}}
+        <h3>There are no contacts.</h3>
+        <a class="button add-contact" href="#">Add Contact</a>
+      {{/each }}
+      <p id="search-empty"></p>
+    </script>
+    <script id="tagFormTemplate" type="text/x-handlebars-template">
+      <form id="tagForm" action="#">
+        <label for="tagName">Tag Name:</label>
+        <input id="tagName" type="text" name="tagName" required>
+        <input class="button" type="submit" value="Submit">
+        <input class="button cancel" type="button" value="Cancel">
       </form>
-    </article>
-    </li>
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
-  <!-- Code tested in chrome without using babel, but babel can be included to run code in browser
-       use next two commented lines and view using an http server.-->
-  <!-- <script src="https://unpkg.com/babel&#45;standalone@6/babel.min.js"></script> -->
-  <!-- <script src="javascripts/manager.js" type="text/babel"></script> -->
-  <script src="javascripts/manager.js"></script>
-</body>
+    </script>
+    <script id="contactFormTemplate" type="text/x-handlebars-template">
+      <form id="contactForm" action="#">
+        <h2>Create Contact</h2>
+        <fieldset>
+          <input type="hidden" name="contact-id" value="{{contact.id}}" required>
+          <label for="name">Full name:</label>
+          <input id="name" type="text" name="name" value="{{contact.name}}" required>
+          <label for="email">Email address:</label>
+          <input id="email" type="email" name="email" value="{{contact.email}}" required>
+          <label for="phone">Phone number:</label>
+          <input id="phone" type="phone" name="phone" value="{{contact.phone}}" required>
+          <label for="tag">Tag:</label>
+          <select id="tag" name="tag">
+            {{#each tags}}
+              <option value="{{this}}" {{selected this ../contact.tag}}>{{this}}</option>
+            {{/each}}
+          </select>
+        </fieldset>
+        <input id="save" class="button" type="submit" value="Submit">
+        <input class="button cancel" type="button" value="Cancel">
+      </form>
+    </script>
+    <script id="contactTemplate" type="text/x-handlebars-template">
+      <article>
+        <h2>{{name}}</h2>
+        <span>
+          <h4>Phone Number:</h4>
+          <p>{{phone}}</p>
+        </span>
+        <span>
+          <h4>Email:</h4>
+          <p>{{email}}</p>
+        </span>
+        <form id="editForm" action="#">
+          <input type="hidden" value="{{id}}">
+          <input class="button edit" type="button" value="Edit">
+          <input class="button delete" type="button" value="Delete">
+        </form>
+      </article>
+      </li>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <!-- Code tested in chrome without using babel, but babel can be included to run code in browser
+         use next two commented lines and view using an http server.-->
+    <!-- <script src="https://unpkg.com/babel&#45;standalone@6/babel.min.js"></script> -->
+    <!-- <script src="javascripts/manager.js" type="text/babel"></script> -->
+    <script src="javascripts/manager.js"></script>
+  </body>
 </html>

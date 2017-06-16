@@ -63,16 +63,23 @@ ContactManager.prototype.bind = function() {
 ContactManager.prototype.displayFormFor = function(contact) {
   let context = { contact: contact, tags: this.tags };
   let $form = $(this.templates.contactFormTemplate(context));
-  $('.slide').slideToggle();
-  $form.insertAfter('.slide').slideToggle();
+  $('#form-container').html($form);
+  $form.slideToggle();
+  $('#contacts').slideToggle();
+  // $form.insertBefore('#filter').slideToggle();
 };
 
 ContactManager.prototype.displayTagForm = function(e) {
   e.preventDefault();
   let $form = $(this.templates.tagFormTemplate(contact));
-  $('.slide').slideToggle();
-  $form.insertAfter('.slide').slideToggle();
+  $('#contacts').slideToggle();
+  $('#form-container').html($form.slideToggle());
 }
+
+ContactManager.prototype.hideForm = function($form) {
+  $('#contacts').slideToggle();
+  $form.slideToggle().remove();
+};
 
 ContactManager.prototype.addTag = function(e) {
   event.preventDefault();
@@ -150,11 +157,6 @@ ContactManager.prototype.cancel = function(e) {
   }
   this.saveCurrentState();
   this.hideForm($form);
-};
-
-ContactManager.prototype.hideForm = function($form) {
-  $('.slide').slideToggle();
-  $form.slideToggle().remove();
 };
 
 ContactManager.prototype.update = function(e) {

@@ -1,237 +1,112 @@
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  width: 100%;
-  margin-bottom: 80px;
-  padding: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  text-align: center;
   font-family: 'Roboto', sans-serif;
 }
 
 header {
-  margin: 0;
-  padding: 10px;
-  background: linear-gradient(to bottom, rgba(157,101,247,1) 0%,rgba(157,101,247,1) 44%,rgba(101,75,141,1) 100%);
-  text-align: center;
+  background: linear-gradient(to bottom, #5f4687 0%,#6e5397 100%);
   color: white;
+}
+
+header, footer {
+  flex: 0 0 100%;
+}
+
+header > * {
+  padding: 10px;
+  margin: 10px;
 }
 
 header h1 {
-  margin-top: 0;
-  padding-top: 10px;
   font-size: 3em;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+.content {
+  display: flex;
+  flex: 1 0 auto;
+  flex-flow: column nowrap;
+}
+
+#contacts {
+  display: flex;
+  flex: 1;
+  flex-flow: column wrap;
+  order: 2;
+  padding: 20px;
+}
+
+aside {
+  flex: 0 0 12em;
+  min-width: 250px;
+  margin: 20px;
+  order 1;
+  padding-top: 30px;
+}
+
+/* individual contacts */
+article {
+  flex: 1;
   margin: 10px;
-}
-
-header p {
-  font-size: 1.5em;
-  color: #c7a7f9;
-}
-
-p:empty {
-  display:none;
-}
-
-main {
-  margin: 0 auto;
-}
-
-main, section {
   padding: 10px;
-  text-align: center;
-  background: #F5F5F5;
+  border-bottom: 1px solid #ccc;
+}
+
+article > * {
+  margin: 8px;
+  text-align: left;
 }
 
 
-section {
-  width: 95%;
-  margin: 20px auto;
-  border-radius: 10px;
+article h2 {
+  margin-left: 0;
+  font-size: 1.5em;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   height: 80px;
-  width: 100%;
-  text-align: center;
-  border-top: 1px solid #cecece;
-  clear: both;
-}
-
-main p,
-.button {
-  font-size: 1.3em;
-  font-weight: bold;
-}
-
-a {
-  text-align: center;
-  text-decoration: none;
-}
-
-#search {
-  margin-left: 10px;
-  -webkit-appearance: none;
-}
-
-.button,
-input,
-select {
-  display: inline-block;
-  margin: 10px auto;
-  border-radius: 8px;
-}
-
-input, select {
-  height: 40px;
-  width: 320px;
-  box-sizing: border-box;
-  padding: 10px;
-  font-size: 1.2em;
-  border: 1px solid #cecece;
-  /* -webkit-appearance: none; */
-}
-
-.button {
-  padding: 10px;
-  background: white;
-  color: #654B8D;
-  border: 1px solid #654B8D;
-  transition: color, background 0.4s ease-in-out;
-}
-
-.selected,
-.button:hover {
-  background: #644A8C;
-  color: white;
-}
-
-#contactForm,
-#tagForm {
-  display: none;
+  padding-top: 10px;
+  border-top: 1px solid #bbb;
 }
 
 form {
-  width: 70%;
-  margin: 10px auto;
-  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  order: 2;
+  height: 0;
+  padding: 20px;
 }
 
-form a.button,
-form input.button {
-  display: inline-block;
-  width: 80%;
-}
+@media (min-width: 800px) {
+  body {
+    flex-flow: column nowrap;
+  }
 
-form h2 {
-  width: 100%;
-  margin: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #cecece;
-}
+  .content {
+    flex-flow: row nowrap;
+  }
 
-fieldset {
-  margin: 0 auto;
-  width: 75%;
-  border: none;
-}
+  #contacts {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
 
-label {
-  display: inline-block;
-  float: left;
-  width: 10em;
-  margin-right: 1em;
-  line-height: 60px;
-  font-weight: bold;
-  text-align: right;
-  clear: both;
-}
+  aside {
+    order: -1;
+  }
 
-form input,
-select {
-  display: inline-block;
-  float: left;
+  form {
+    display: flex;
+    flex: 1;
+    flex-flow: row nowrap;
+    order: 2;
+    height: 0;
+  }
 }
-
-input.button {
-  float: none;
-}
-
-#edit, #delete {
-  padding: 2px;
-}
-
-#contacts, main {
-  overflow: auto;
-}
-
-article {
-  display: block;
-  float: left;
-  margin: 5px;
-  width: 250px;
-  text-align: left;
-  border-bottom: 1px solid #cecece;
-}
-
-article span {
-  display: block;
-  margin: 5px 0;
-}
-
-h2 {
-  margin: 20px 0;
-  font-size: 2.25em;
-}
-
-article h2,
-article h4 {
-  font-weight: bold;
-}
-
-article h4,
-article p {
-  margin: 0;
-  padding: 0;
-}
-
-article form {
-  margin-left: 0;
-  padding-left: 0;
-  text-align: left;
-  display: inline-block;
-}
-
-article input.button {
-  margin: 5px;
-  padding: 0 8px;
-  width: auto;
-  font-size: 1em;
-  font-weight: normal;
-}
-
-.tags ul {
-  margin: 0 auto;
-  padding: 0;
-  display: table;
-}
-
-.tags {
-  margin: 0 auto;
-  width: 80%;
-}
-
-.tags ul li {
-  display: inline-block;
-  float: left;
-  margin: 5px;
-  text-align: center;
-}
-
