@@ -38,6 +38,7 @@
       <h3>There are no contacts.</h3>
       <a class="button add-contact" href="#">Add Contact</a>
     {{/each }}
+    <p id="search-empty"></p>
   </script>
   <script id="tagFormTemplate" type="text/x-handlebars-template">
     <form id="tagForm" action="#">
@@ -90,6 +91,10 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  <!-- Code tested in chrome without using babel, but babel can be included to run code in browser
+       use next two commented lines and view using an http server.-->
+  <!-- <script src="https://unpkg.com/babel&#45;standalone@6/babel.min.js"></script> -->
+  <!-- <script src="javascripts/manager.js" type="text/babel"></script> -->
   <script src="javascripts/manager.js"></script>
 </body>
 </html>

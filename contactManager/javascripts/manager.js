@@ -45,7 +45,11 @@ ContactManager.prototype.bind = function() {
   $(document).on('click', '.add-contact', this.createContact.bind(this));
 
   $(document).on('click.add-tag', '.add-tag', this.displayTagForm.bind(this));
-  $('.tags').on('click', 'a', this.filterByTag.bind(this));
+  $('.tags').on('click', 'a', e => {
+    e.preventDefault();
+    $(e.target).toggleClass('selected');
+    this.filterByTag();
+  });
   $('#search').on('input, keyup', this.filterContacts.bind(this));
   $(document).on('click', 'input.cancel', this.cancel.bind(this));
   $(document).on('blur', '#name, #email, #phone, #tag', this.update.bind(this));
@@ -92,28 +96,27 @@ ContactManager.prototype.createContact = function(e) {
 ContactManager.prototype.filterContacts = function(event) {
   let searchVal = $(event.currentTarget).val();
   if (searchVal.length === 0) {
-    this.renderContacts();
+    this.filterByTag();
+    $('#search-empty').text('');
     return;
   }
-  let regExp = new RegExp(searchVal, 'i');
-  let matches = $('#contacts').find('article').filter((index, el) => {
-    return regExp.test($(el).find('h2').text())
-  }).show();
-  $('#contacts').find('article').filter((index, el) => {
-    return !regExp.test($(el).find('h2').text())
-  }).hide();
-  if (matches.length === 0) {
-    $('#contacts').html(`<h3>There are no contacts with search value ${searchVal}</h3`);
+  let regExp = new RegExp(searchVal.replace(/[^a-z]/ig, ''), 'i');
+  this.contacts.forEach(contact => {
+    let $article = $(`article:visible:contains(${contact.name})`);
+    regExp.test($article.find('h2').text()) ? $article.show() : $article.hide();
+  });
+  if ($('article:visible').length === 0) {
+    $('#search-empty').text(`There are no contacts with search value ${searchVal}`);
+  } else {
+    $('#search-empty').text('');
   }
 };
 
 ContactManager.prototype.filterByTag = function(event) {
-  event.preventDefault();
-  $(event.currentTarget).toggleClass('selected');
   let selectedTags = $('.selected').map((_, el) => $(el).text()).get();
-  $('section').find('article').filter((_, el) => {
-    let contactId = +$(el).find(':hidden').val();
-    return selectedTags.indexOf(this.getContact(contactId).tag) !== -1;
+  this.contacts.forEach(contact => {
+    let $article = $('article').filter((_, el) => $(el).find('input:hidden').val() === contact.id + '');
+    selectedTags.indexOf(contact.tag) === -1 ? $article.hide() : $article.show();
   });
 };
 
@@ -143,7 +146,7 @@ ContactManager.prototype.cancel = function(e) {
   let isContactComplete = $form.find(':empty').not('.button, :hidden').length === 0;
   if (!isContactComplete) {
     this.contacts.splice(this.contacts.indexOf(contact), 1);
-    if (this.currentId > 0) { currentId--; }
+    if (this.currentId > 0) { this.currentId--; }
   }
   this.saveCurrentState();
   this.hideForm($form);

@@ -27,9 +27,14 @@ header h1 {
 h1, h2, h3, p {
   margin: 10px;
 }
+
 header p {
   font-size: 1.5em;
   color: #c7a7f9;
+}
+
+p:empty {
+  display:none;
 }
 
 main {
@@ -171,7 +176,7 @@ article {
   display: block;
   float: left;
   margin: 5px;
-  width: 200px;
+  width: 250px;
   text-align: left;
   border-bottom: 1px solid #cecece;
 }
