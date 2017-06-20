@@ -23,26 +23,31 @@
         <a class="button add-tag" href="#">Add Tag</a>
       </div>
       <input id="search" type="search" name="search" placeholder="Search">
-      <div class="tags">
-        <ul>
-          <li><a class="button selected" href="#">Family</a></li>
-          <li><a class="button selected" href="#">Co-Workers</a></li>
-          <li><a class="button selected" href="#">Friends</a></li>
-        </ul>
-      </div> <!-- end tags -->
+      <div class="tags"></div> <!-- end tags -->
     </aside>
   </div> <!-- end content -->
   <footer>
     <p>Developed by Katherine Ebel</p>
   </footer>
+    <script id="tagsTemplate" type="text/x-handlebars-template">
+      <ul>
+        {{#each tags}}
+          <li><a class="button selected" href="#">{{this}}</a></li>
+        {{/each}}
+      </ul>
+    </script>
     <script id="contactsTemplate" type="text/x-handlebars-template">
       {{#each contacts}}
         {{> contact}}
       {{else}}
-        <h3 class="no-contacts">There are no contacts.</h3>
-        <a class="button add-contact no-contacts" href="#">Add Contact</a>
+        <div class="no-contacts">
+          <h3>There are no contacts.</h3>
+          <a class="button add-contact" href="#">Add Contact</a>
+        </div>
       {{/each }}
-      <p id="search-empty"></p>
+      <div class="no-contacts">
+        <p id="search-empty"></p>
+      </div>
     </script>
     <script id="tagFormTemplate" type="text/x-handlebars-template">
         <legend class="form-name">Add Tag</legend>
@@ -58,7 +63,7 @@
     <script id="contactFormTemplate" type="text/x-handlebars-template">
         <legend class="form-name">Create Contact</legend>
         <fieldset>
-          <input type="hidden" name="contact-id" value="{{contact.id}}" required>
+          <input type="hidden" name="id" value="{{contact.id}}" required>
           <div class="inline-group">
             <label for="name">Full name:</label>
             <input id="name" type="text" name="name" value="{{contact.name}}" required>
@@ -74,6 +79,7 @@
           <div class="inline-group">
             <label for="tag">Tag:</label>
             <select id="tag" name="tag">
+                <option value="None">None</option>
               {{#each tags}}
                 <option value="{{this}}" {{selected this ../contact.tag}}>{{this}}</option>
               {{/each}}

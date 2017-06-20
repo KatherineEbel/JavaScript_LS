@@ -1,20 +1,12 @@
 body {
-  display: flex;
-  flex-flow: column nowrap;
   min-height: 100vh;
   text-align: center;
   font-family: -apple-system, 'Helvetica Neue', 'Roboto', sans-serif;
 }
 
-input, select {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
+/* header styles  */
 header {
   background: linear-gradient(to bottom, #5f4687 0%,#6e5397 100%);
-  color: white;
 }
 
 header, footer {
@@ -34,25 +26,62 @@ h1, h2, h3, h4 {
   font-weight: bold;
 }
 
+/*  primary container */
 .content {
-  display: flex;
   flex: 1 0 auto;
-  flex-flow: column nowrap;
-  /* align-items: stretch; */
 }
 
-/* form { */
-/*   max-height: 380px; */
-/* } */
+/*  flex containers */
+body, .content,
+#contacts, form,
+.slide-container,
+.inline-group,
+.tags ul,
+aside#filter {
+  display: flex;
+}
+
+.no-contacts {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  margin: 10px;
+  line-height: 1.5em;
+}
+
+.no-contacts > * {
+  margin: 10px;
+}
+.no-contacts p:empty {
+  flex:0;
+}
+
+/*  flex columns */
+body,
+aside#filter,
+.content {
+  flex-flow: column nowrap;
+}
 
 #contacts,
 form {
-  display: flex;
-  flex: 1 0;
+  flex: 1;
   flex-flow: column wrap;
   align-content: flex-start;
   overflow: hidden;
-  transition: flex .5s ease-out;
+  transition: flex .3s ease-out;
+}
+
+form.collapsed,
+#contacts.collapsed {
+  flex: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/*  used to make form/contact transition look better */
+.order-last {
+  order: 2;
 }
 
 #filter,
@@ -60,13 +89,22 @@ form {
   padding: 20px;
 }
 
+/* flex rows */
 .slide-container {
-  display: flex;
   flex: 1 1 100%;
   flex-flow: row nowrap;
 }
 
-/* form styles  */
+.tags ul {
+  flex-flow: row wrap;
+}
+
+.tags li {
+  flex: 0 0 auto;
+  font-size: 12px;
+}
+
+/* form specific styles  */
 
 form legend {
   font-size: 2em;
@@ -75,20 +113,13 @@ form legend {
   border-bottom: 1px solid #cecece;
 }
 
-form.collapsed,
-#contacts.collapsed {
-  flex: 0 0 0;
-  padding: 0;
-  margin: 0;
-  order: 2;
-}
-
-.order-last {
-  order: 2;
+input, select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .inline-group {
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -118,75 +149,71 @@ a.button {
   flex: 0 0 auto;
 }
 
-input,
-input.button,
-select, a {
-  border-radius: 8px;
-  border: 1px solid #cecece;
-}
-
 .button {
   margin: 8px;
   background: white;
-  border: 1px solid #604788;
   color: #604788;
+}
+
+/* text color */
+header,
+.button:hover,
+.button.selected {
+  color: white;
 }
 
 .button:hover,
 .button.selected {
-  color: white;
   background: #604788;
+}
+
+a,
+input,
+select,
+aside#filter {
+  border-radius: 8px;
+}
+
+input,
+input.button,
+select, a {
+  border: 1px solid #604788;
+}
+
+/* paragraph text-size */
+p,
+input, .button,
+input[type=search] {
+  font-size: 1.2em;
 }
 
 input, .button,
 input[type=search] {
   display: inline-block;
   padding: 10px;
-  font-size: 1.2em;
 }
 
 a {
   text-decoration: none;
 }
 
-#filter {
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 0 0 12em;
+aside#filter {
+  flex: 0 0 auto;
   align-self: center;
   order: -1;
   margin: 20px;
   width: 80%;
 }
 
-#filter, #contacts,
-form {
+aside#filter {
   background: #F5F5F5;
-  border-radius: 8px;
 }
 
-#search-empty:empty {
-  flex: 0;
-}
-.no-contacts,
-p#search-empty {
-  align-self: center;
-  margin: 10px;
-}
 
-.tags ul {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.tags li {
-  flex: 0 0 auto;
-  font-size: 12px;
-}
 
 /* individual contacts */
 article {
-  flex: 0 auto;
+  flex: 0 content;
   align-self: baseline;
   margin: 10px;
   padding: 10px;
@@ -220,17 +247,24 @@ footer {
     flex-flow: row wrap;
   }
 
-  .slide-container {
-    flex-flow: column nowrap;
-  }
 
 }
+
 @media (min-width: 800px) {
   .content {
     flex-flow: row nowrap;
   }
 
-  #filter {
+  #contacts,
+  aside#filter {
     align-self: flex-start;
+  }
+
+  #filter {
+    max-width: 340px;
+  }
+
+  .slide-container {
+    flex-flow: column nowrap;
   }
 }
