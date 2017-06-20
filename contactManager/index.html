@@ -13,10 +13,15 @@
     <p>Using jQuery, Localstorage, and Handlebars</p>
   </header>
   <div class="content">
-    <main id="contacts"></main>
+    <div class="slide-container">
+      <main id="contacts"></main>
+      <form id="form-container" class="collapsed" action="#"></form>
+    </div>
     <aside id="filter">
-      <a class="button add-contact" href="#">Add Contact</a>
-      <a class="button add-tag" href="#">Add Tag</a>
+      <div class="inline-group">
+        <a class="button add-contact" href="#">Add Contact</a>
+        <a class="button add-tag" href="#">Add Tag</a>
+      </div>
       <input id="search" type="search" name="search" placeholder="Search">
       <div class="tags">
         <ul>
@@ -34,44 +39,55 @@
       {{#each contacts}}
         {{> contact}}
       {{else}}
-        <h3>There are no contacts.</h3>
-        <a class="button add-contact" href="#">Add Contact</a>
+        <h3 class="no-contacts">There are no contacts.</h3>
+        <a class="button add-contact no-contacts" href="#">Add Contact</a>
       {{/each }}
       <p id="search-empty"></p>
     </script>
     <script id="tagFormTemplate" type="text/x-handlebars-template">
-      <form id="tagForm" action="#">
-        <label for="tagName">Tag Name:</label>
-        <input id="tagName" type="text" name="tagName" required>
-        <input class="button" type="submit" value="Submit">
-        <input class="button cancel" type="button" value="Cancel">
-      </form>
+        <legend class="form-name">Add Tag</legend>
+        <div class="inline-group">
+          <label for="tagName">Tag Name:</label>
+          <input id="tagName" type="text" name="tagName" required>
+        </div>
+        <div class="inline-group">
+          <input class="button" type="submit" value="Submit">
+          <input class="button cancel" type="button" value="Cancel">
+        </div>
     </script>
     <script id="contactFormTemplate" type="text/x-handlebars-template">
-      <form id="contactForm" action="#">
-        <h2>Create Contact</h2>
+        <legend class="form-name">Create Contact</legend>
         <fieldset>
           <input type="hidden" name="contact-id" value="{{contact.id}}" required>
-          <label for="name">Full name:</label>
-          <input id="name" type="text" name="name" value="{{contact.name}}" required>
-          <label for="email">Email address:</label>
-          <input id="email" type="email" name="email" value="{{contact.email}}" required>
-          <label for="phone">Phone number:</label>
-          <input id="phone" type="phone" name="phone" value="{{contact.phone}}" required>
-          <label for="tag">Tag:</label>
-          <select id="tag" name="tag">
-            {{#each tags}}
-              <option value="{{this}}" {{selected this ../contact.tag}}>{{this}}</option>
-            {{/each}}
-          </select>
+          <div class="inline-group">
+            <label for="name">Full name:</label>
+            <input id="name" type="text" name="name" value="{{contact.name}}" required>
+          </div>
+          <div class="inline-group">
+            <label for="email">Email address:</label>
+            <input id="email" type="email" name="email" value="{{contact.email}}" required>
+          </div>
+          <div class="inline-group">
+            <label for="phone">Phone number:</label>
+            <input id="phone" type="phone" name="phone" value="{{contact.phone}}" required>
+          </div>
+          <div class="inline-group">
+            <label for="tag">Tag:</label>
+            <select id="tag" name="tag">
+              {{#each tags}}
+                <option value="{{this}}" {{selected this ../contact.tag}}>{{this}}</option>
+              {{/each}}
+            </select>
+          </div>
         </fieldset>
-        <input id="save" class="button" type="submit" value="Submit">
-        <input class="button cancel" type="button" value="Cancel">
-      </form>
+        <div class="inline-group">
+          <input id="save" class="button" type="submit" value="Submit">
+          <input class="button cancel" type="button" value="Cancel">
+        </div>
     </script>
     <script id="contactTemplate" type="text/x-handlebars-template">
       <article>
-        <h2>{{name}}</h2>
+        <h2 id="contactName">{{name}}</h2>
         <span>
           <h4>Phone Number:</h4>
           <p>{{phone}}</p>
@@ -82,8 +98,10 @@
         </span>
         <form id="editForm" action="#">
           <input type="hidden" value="{{id}}">
-          <input class="button edit" type="button" value="Edit">
-          <input class="button delete" type="button" value="Delete">
+          <span>
+            <input class="button edit" type="button" value="Edit">
+            <input class="button delete" type="button" value="Delete">
+          </span>
         </form>
       </article>
       </li>
