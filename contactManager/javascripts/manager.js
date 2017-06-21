@@ -12,7 +12,7 @@ let $UIElements = {
   formContainer: $('#form-container'),
   tagsContainer: $('.tags'),
   contacts: $('#contacts'),
-  searchEmptyMessage(searchVal){
+  setSearchEmptyMessage(searchVal){
      $('#search-empty')
        .text(searchVal.length === 0 ? '' :`There are no contacts containing ${searchVal}`);
   },
@@ -28,8 +28,17 @@ let $UIElements = {
   addTag(name) {
     this.tagsContainer.find('ul').append(`<li><a class="button" href="#">${name}</a></li>`)
   },
-  getSelectedTagNames() {
+  getSelectedTagNames() { // returns an array of tag names that are selected
     return $('.selected').map((_, el) => $(el).text()).get();
+  },
+  displayFormWith($content) {
+    $UIElements.contacts.removeClass('order-last');
+    $UIElements.contacts.toggleClass('collapsed');
+    this.formContainer.html($content).toggleClass('collapsed');
+  },
+  hideForm() {
+    this.contacts.addClass('order-last').toggleClass('collapsed');
+    this.formContainer.toggleClass('collapsed');
   }
 };
 
@@ -93,7 +102,7 @@ ContactManager.prototype.bind = function() {
     this.saveCurrentState();
     this.renderContacts();
     this.filterByTag();
-    this.hideForm();
+    $UIElements.hideForm();
   });
   $(document).on('click', '.add-contact', event => {
     event.preventDefault();
@@ -104,14 +113,14 @@ ContactManager.prototype.bind = function() {
   $(document).on('click.add-tag', '.add-tag', event => {
     event.preventDefault();
     if ($UIElements.isFormActive()) { return; }
-    this.displayTagForm();
+    this.configureTagForm();
   });
   $UIElements.tagsContainer.on('click', 'a', e => {
     e.preventDefault();
     $(e.target).toggleClass('selected');
     this.filterByTag();
   });
-  $(document).on('click', 'input.delete, input.edit', event => {
+  $(document).on('click', 'button.delete, button.edit', event => {
     event.preventDefault();
     let contactId = +$(event.target).parent().siblings(':hidden').val();
     this[$(event.target).val().toLowerCase()](contactId);
@@ -120,26 +129,16 @@ ContactManager.prototype.bind = function() {
   $(document).on('click', 'input.cancel', this.cancel.bind(this));
 };
 
-ContactManager.prototype.displayFormFor = function(contact) {
+ContactManager.prototype.configureFormFor = function(contact) {
   let context = { contact: contact, tags: this.tags };
   let $formContent = $(this.templates.contactFormTemplate(context));
-  $UIElements.contacts.removeClass('order-last');
-  $UIElements.formContainer.html($formContent);
-  $UIElements.contacts.toggleClass('collapsed');
-  $UIElements.formContainer.toggleClass('collapsed');
+  $UIElements.displayFormWith($formContent);
 };
 
-ContactManager.prototype.displayTagForm = function() {
-  let $form = $(this.templates.tagFormTemplate());
-  $UIElements.formContainer.html($form).toggleClass('collapsed');
-  $UIElements.contacts.toggleClass('collapsed');
-
+ContactManager.prototype.configureTagForm = function() {
+  let $formContent = $(this.templates.tagFormTemplate());
+  $UIElements.displayFormWith($formContent);
 }
-
-ContactManager.prototype.hideForm = function() {
-  $UIElements.contacts.addClass('order-last').toggleClass('collapsed');
-  $UIElements.formContainer.toggleClass('collapsed');
-};
 
 ContactManager.prototype.addTag = function(e) {
   e.preventDefault();
@@ -154,7 +153,7 @@ ContactManager.prototype.getNextId = function() {
 
 ContactManager.prototype.createContact = function() {
   let newContact = Object.create(contact);
-  this.displayFormFor(newContact);
+  this.configureFormFor(newContact);
   $UIElements.setFormTitle('Create Contact');
 };
 
@@ -165,7 +164,7 @@ ContactManager.prototype.filterContacts = function(event) {
   let searchVal = $(event.currentTarget).val();
   if (searchVal.length === 0) {
     this.filterByTag();
-    $UIElements.searchEmptyMessage('');
+    $UIElements.setSearchEmptyMessage('');
     return;
   }
   let regExp = new RegExp(searchVal.replace(/[^a-z]/ig, ''), 'i');
@@ -174,9 +173,9 @@ ContactManager.prototype.filterContacts = function(event) {
     regExp.test($article.find('#contactName').text()) ? $article.show() : $article.hide();
   });
   if ($('article:visible').length === 0) {
-    $UIElements.searchEmptyMessage(searchVal);
+    $UIElements.setSearchEmptyMessage(searchVal);
   } else {
-    $UIElements.searchEmptyMessage('');
+    $UIElements.setSearchEmptyMessage('');
   }
 };
 
@@ -188,9 +187,9 @@ ContactManager.prototype.filterByTag = function() {
     selectedTags.indexOf(contact.tag) === -1 ? $article.hide() : $article.show();
   });
   if ($('article:visible').length === 0) {
-    $UIElements.searchEmptyMessage(`${selectedTags.join(', ')}`);
+    $UIElements.setSearchEmptyMessage(`${selectedTags.join(', ')}`);
   } else {
-    $UIElements.searchEmptyMessage('');
+    $UIElements.setSearchEmptyMessage('');
   }
 };
 
@@ -206,13 +205,13 @@ ContactManager.prototype.delete = function (contactId) {
 
 ContactManager.prototype.edit = function (contactId) {
   let contact = this.getContact(contactId);
-  this.displayFormFor(contact);
+  this.configureFormFor(contact);
   $UIElements.setFormTitle('Edit Contact');
 };
 
 ContactManager.prototype.cancel = function(e) {
   e.preventDefault();
-  this.hideForm();
+  $UIElements.hideForm();
 };
 
 ContactManager.prototype.update = function(e) {

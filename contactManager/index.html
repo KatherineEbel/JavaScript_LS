@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="stylesheets/reset.css"style.css" media="all">
+  <link rel="stylesheet" href="stylesheets/reset.css" media="all">
   <link rel="stylesheet" href="stylesheets/styles.css" media="all">
   <meta charset="UTF-8">
   <title>Contact Manager</title>
@@ -79,7 +79,6 @@
           <div class="inline-group">
             <label for="tag">Tag:</label>
             <select id="tag" name="tag">
-                <option value="None">None</option>
               {{#each tags}}
                 <option value="{{this}}" {{selected this ../contact.tag}}>{{this}}</option>
               {{/each}}
@@ -105,8 +104,8 @@
         <form id="editForm" action="#">
           <input type="hidden" value="{{id}}">
           <span>
-            <input class="button edit" type="button" value="Edit">
-            <input class="button delete" type="button" value="Delete">
+            <button class="button edit" type="button" value="Edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+            <button class="button delete" type="button" value="Delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
           </span>
         </form>
       </article>
@@ -116,7 +115,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
     <!-- Code tested in chrome without using babel, but babel can be included to run code in browser
          use next two commented lines and view using an http server.-->
-    <!-- <script src="https://unpkg.com/babel&#45;standalone@6/babel.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel&#45;standalone/6.25.0/babel.min.js"></script> -->
+    <script src="https://use.fontawesome.com/66b9d2c0ae.js"></script>
     <!-- <script src="javascripts/manager.js" type="text/babel"></script> -->
     <script src="javascripts/manager.js"></script>
   </body>

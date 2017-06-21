@@ -170,12 +170,13 @@ header,
 a,
 input,
 select,
+button,
 aside#filter {
   border-radius: 8px;
 }
 
 input,
-input.button,
+button.button,
 select, a {
   border: 1px solid #604788;
 }
